@@ -28,6 +28,9 @@ NSInteger *rssiA = 0;
 NSInteger *rssiB = 0;
 NSInteger *rssiC = 0;
 
+NSInteger *txPowerA = 0;
+NSInteger *txPowerB = 0;
+NSInteger *txPowerC = 0;
 
 
 
@@ -87,6 +90,7 @@ NSInteger *rssiC = 0;
     NSString *ID = [be substringWithRange:NSMakeRange(preID.location + preID.length, postID.location - preID.location - preID.length)];
     NSLog(@"%@", ID);
     
+    
     NSRange preRange = [be rangeOfString:@"RSSI:"];
     NSInteger preIdx = preRange.location + preRange.length;
     
@@ -98,6 +102,17 @@ NSInteger *rssiC = 0;
     
     NSString *txPower = [be substringWithRange:NSMakeRange(postRange.location + postRange.length + 1, 1)];
     NSLog(@"%@", txPower);
+    
+    NSInteger *integer = [RSSI intValue];
+    
+    if ([ID hasSuffix:@"0034"]){
+        if (rssiA == 0) {
+            rssiA = integer;
+        } else {
+            rssiA = (rssiA + 8);
+        }
+        
+    }
 
 }
 

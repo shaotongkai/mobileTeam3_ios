@@ -27,6 +27,8 @@
 		6BD89F741B154503001C5B31 /* EddystoneScannerSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD89F731B154503001C5B31 /* EddystoneScannerSampleTests.m */; };
 		6BD89F7E1B154547001C5B31 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BD89F7D1B154547001C5B31 /* CoreBluetooth.framework */; };
 		6BD89F811B1545AA001C5B31 /* ESSBeaconScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD89F801B1545AA001C5B31 /* ESSBeaconScanner.m */; };
+		81A3DA441D480B7B006E1CCA /* FirstTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A3DA431D480B7B006E1CCA /* FirstTableViewController.m */; };
+		81A3DA471D480BA7006E1CCA /* FirstDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A3DA461D480BA7006E1CCA /* FirstDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,10 @@
 		6BD89F7D1B154547001C5B31 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		6BD89F7F1B1545AA001C5B31 /* ESSBeaconScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESSBeaconScanner.h; sourceTree = "<group>"; };
 		6BD89F801B1545AA001C5B31 /* ESSBeaconScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESSBeaconScanner.m; sourceTree = "<group>"; };
+		81A3DA421D480B7B006E1CCA /* FirstTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstTableViewController.h; sourceTree = "<group>"; };
+		81A3DA431D480B7B006E1CCA /* FirstTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstTableViewController.m; sourceTree = "<group>"; };
+		81A3DA451D480BA7006E1CCA /* FirstDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstDetailViewController.h; sourceTree = "<group>"; };
+		81A3DA461D480BA7006E1CCA /* FirstDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +185,10 @@
 				6B3F78821B19764F00AFF84C /* Beacon Scanner */,
 				6BD89F5B1B154502001C5B31 /* AppDelegate.h */,
 				6BD89F5C1B154502001C5B31 /* AppDelegate.m */,
+				81A3DA421D480B7B006E1CCA /* FirstTableViewController.h */,
+				81A3DA431D480B7B006E1CCA /* FirstTableViewController.m */,
+				81A3DA451D480BA7006E1CCA /* FirstDetailViewController.h */,
+				81A3DA461D480BA7006E1CCA /* FirstDetailViewController.m */,
 				6BD89F5E1B154502001C5B31 /* ViewController.h */,
 				6BD89F5F1B154502001C5B31 /* ViewController.m */,
 				6BD89F611B154503001C5B31 /* Main.storyboard */,
@@ -364,6 +374,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81A3DA471D480BA7006E1CCA /* FirstDetailViewController.m in Sources */,
+				81A3DA441D480B7B006E1CCA /* FirstTableViewController.m in Sources */,
 				6BD89F601B154502001C5B31 /* ViewController.m in Sources */,
 				6B3F78851B19766E00AFF84C /* ESSEddystone.m in Sources */,
 				6BD89F5D1B154502001C5B31 /* AppDelegate.m in Sources */,
