@@ -20,5 +20,6 @@
 
 @property (nonatomic, strong) NSString *ASIN;
 
+@property (weak, nonatomic) IBOutlet UIButton *navigation;
 
 @end

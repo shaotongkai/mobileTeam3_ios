@@ -85,6 +85,8 @@
                                                                 _price.text = [myPrice stringByAppendingString:_item[@"price"]];
                                                                 _label3.text = @"Not in store";
                                                                 
+                                                                _navigation.enabled = false;
+                                                                
                                                             } else {
                                                                 _label3.text = @"In store";
                                                                 _price.text = jsonObject[@"price"];
