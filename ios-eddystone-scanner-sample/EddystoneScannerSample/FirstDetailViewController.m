@@ -8,6 +8,8 @@
 
 #import "FirstDetailViewController.h"
 
+#define kVerySmallValue (0.000001)
+
 @interface FirstDetailViewController ()
 
 @end
@@ -18,8 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _itemTitle.text = _item[@"title"];
-    NSString *myPrice = @"price: ";
-    _price.text = [myPrice stringByAppendingString:_item[@"price"]];
+    
     _ASIN = _item[@"ASIN"];
     
     
@@ -54,6 +55,52 @@
     
     [_web2 loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_item[@"customReview"]]]];
     
+    NSString *thisString = @"http://ec2-52-87-235-234.compute-1.amazonaws.com:8080/getProductLoc?ASIN=";
+    
+    thisString = [thisString stringByAppendingString:_ASIN];
+
+    
+    NSString *newString = [thisString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
+    
+    NSURL * urlThis = [NSURL URLWithString:newString];
+    
+    NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:urlThis
+                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                        if(error == nil)
+                                                        {
+                                                            NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+                                                            NSLog(@"Data = %@",text);
+                                                            
+                                                            NSError *e = nil;
+                                                            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &e];
+                                                            
+                                                            double xVal= [jsonObject[@"x"] doubleValue];
+                                                            
+                                                            if(fabsf(xVal + 1) < kVerySmallValue) {
+                                                                NSString *myPrice = @"price: ";
+                                                                _price.text = [myPrice stringByAppendingString:_item[@"price"]];
+                                                                _label3.text = @"Not in store";
+                                                                
+                                                            } else {
+                                                                _label3.text = @"In store";
+                                                                _price.text = jsonObject[@"price"];
+                                                            }
+                                                            
+                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                
+                                                            });
+                                                            
+                                                        } else {
+                                                            NSLog(@"error!!!!!!!!!!!!!!!");
+                                                        }
+                                                        
+                                                    }];
+    
+    [dataTask resume];
     
     
 }
