@@ -18,7 +18,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _itemTitle.text = _item[@"title"];
-    _price.text = _item[@"price"];
+    NSString *myPrice = @"price: ";
+    _price.text = [myPrice stringByAppendingString:_item[@"price"]];
     _ASIN = _item[@"ASIN"];
     
     
@@ -47,6 +48,12 @@
         }
     }];
     [task resume];
+    
+    
+    [_web1 loadHTMLString:_item[@"description"] baseURL:nil];
+    
+    [_web2 loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_item[@"customReview"]]]];
+    
     
     
 }
