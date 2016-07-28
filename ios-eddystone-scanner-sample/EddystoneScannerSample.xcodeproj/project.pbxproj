@@ -29,6 +29,7 @@
 		6BD89F811B1545AA001C5B31 /* ESSBeaconScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD89F801B1545AA001C5B31 /* ESSBeaconScanner.m */; };
 		81A3DA441D480B7B006E1CCA /* FirstTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A3DA431D480B7B006E1CCA /* FirstTableViewController.m */; };
 		81A3DA471D480BA7006E1CCA /* FirstDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A3DA461D480BA7006E1CCA /* FirstDetailViewController.m */; };
+		D865658A1D49F406002F1858 /* FirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86565891D49F406002F1858 /* FirstTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,8 @@
 		81A3DA431D480B7B006E1CCA /* FirstTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstTableViewController.m; sourceTree = "<group>"; };
 		81A3DA451D480BA7006E1CCA /* FirstDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstDetailViewController.h; sourceTree = "<group>"; };
 		81A3DA461D480BA7006E1CCA /* FirstDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstDetailViewController.m; sourceTree = "<group>"; };
+		D86565881D49F406002F1858 /* FirstTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstTableViewCell.h; sourceTree = "<group>"; };
+		D86565891D49F406002F1858 /* FirstTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +190,8 @@
 				6BD89F5C1B154502001C5B31 /* AppDelegate.m */,
 				81A3DA421D480B7B006E1CCA /* FirstTableViewController.h */,
 				81A3DA431D480B7B006E1CCA /* FirstTableViewController.m */,
+				D86565881D49F406002F1858 /* FirstTableViewCell.h */,
+				D86565891D49F406002F1858 /* FirstTableViewCell.m */,
 				81A3DA451D480BA7006E1CCA /* FirstDetailViewController.h */,
 				81A3DA461D480BA7006E1CCA /* FirstDetailViewController.m */,
 				6BD89F5E1B154502001C5B31 /* ViewController.h */,
@@ -382,6 +387,7 @@
 				6B3F78981B1CB46A00AFF84C /* ESSTimer.m in Sources */,
 				6BD89F811B1545AA001C5B31 /* ESSBeaconScanner.m in Sources */,
 				6BD89F5A1B154502001C5B31 /* main.m in Sources */,
+				D865658A1D49F406002F1858 /* FirstTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

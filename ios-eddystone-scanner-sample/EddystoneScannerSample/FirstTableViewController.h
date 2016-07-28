@@ -13,6 +13,9 @@
 @interface FirstTableViewController : UITableViewController <UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
+@property (nonatomic, strong) NSMutableArray * matchingItems;
+
 @property (strong, nonatomic) FirstDetailViewController *detailViewController;
 
 @property (nonatomic, strong) NSArray *items;

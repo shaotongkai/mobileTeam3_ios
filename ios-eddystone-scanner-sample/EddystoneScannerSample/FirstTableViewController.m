@@ -7,11 +7,11 @@
 //
 
 #import "FirstTableViewController.h"
+#import "FirstTableViewCell.h"
 #import "FirstDetailViewController.h"
 
 @interface FirstTableViewController ()
 
-@property (nonatomic, weak) IBOutlet UIBarButtonItem *viewAllButton;
 
 @end
 
@@ -21,6 +21,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    [self.searchBar setDelegate:self];
+    
+    _matchingItems = [[NSMutableArray alloc] init];
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -34,9 +40,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
 
 - (BOOL)shouldAutorotate {
     return YES;
@@ -50,10 +53,10 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    FirstDetailViewController *mapViewController = segue.destinationViewController;
     
     if ([segue.identifier isEqualToString:@"showDetail"]) {
-        
+        NSLog(@"showDetail");
+        _detailViewController = (FirstDetailViewController*)[segue destinationViewController];
     }
 }
 
@@ -65,12 +68,55 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [self.matchingItems count];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    _detailViewController.item = [_matchingItems objectAtIndex:indexPath.row];
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)anIndexPath {
+    
+    FirstTableViewCell * cell = (FirstTableViewCell *)[aTableView dequeueReusableCellWithIdentifier:@"Cell"];
+    
+    
+    cell.title.text = [self.matchingItems objectAtIndex:anIndexPath.row][@"title"];
+    
+    NSURL * url = [NSURL URLWithString: [self.matchingItems objectAtIndex:anIndexPath.row][@"image"]];
+    
+    
+    NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *_Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (data) {
+            UIImage *image = [UIImage imageWithData:data];
+            if(image) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // code here
+                    [cell.image setImage:image];
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // code here
+                    UIImage *defaultImage = [UIImage imageNamed:@"default.png"];
+                    [cell.image setImage:image];
+                });
+            }
+        }
+        if (error) {
+            NSLog(@"ERROR, %@", error);
+        }
+    }];
+    [task resume];
+    
+    
+    return cell;
 }
 
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
+    self.searchBar.text = @"";
     [searchBar resignFirstResponder];
 }
 
@@ -82,36 +128,69 @@
     [searchBar setShowsCancelButton:NO animated:YES];
 }
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    
-    // If the text changed, reset the tableview if it wasn't empty.
-    if (self.items.count != 0) {
-        
-        // Set the list of places to be empty.
-        self.items = @[];
-        // Reload the tableview.
-        [self.tableView reloadData];
-        // Disable the "view all" button.
-        self.viewAllButton.enabled = NO;
-    }
-}
 
 - (void)startSearch:(NSString *)searchString {
-//    if (self.localSearch.searching)
-//    {
-//        [self.localSearch cancel];
-//    }
+
+    NSString *myString = @"http://ec2-52-87-235-234.compute-1.amazonaws.com:8080/searchProducts?Keywords=";
+    
+    myString = [myString stringByAppendingString:searchString];
+    
+    myString = [myString stringByAppendingString:@"&SearchIndex="];
+    
+    int rateLevel = self.searchBar.selectedScopeButtonIndex;
+    
+    if (rateLevel == 0) {
+        myString = [myString stringByAppendingString:@"All"];
+    } else if (rateLevel == 1) {
+        myString = [myString stringByAppendingString:@"Books"];
+    } else if (rateLevel == 2) {
+        myString = [myString stringByAppendingString:@"Electronics"];
+    } else if (rateLevel == 3) {
+        myString = [myString stringByAppendingString:@"GourmetFood"];
+    } else {
+        myString = [myString stringByAppendingString:@"Apparel"];
+    }
+    
+    NSLog(@"Data = %@",myString);
+    
+    NSString *newString = [myString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
     
-    NSURL * url = [NSURL URLWithString:@"http://ec2-52-87-235-234.compute-1.amazonaws.com:8080/searchProducts?Keywords=harry potter&SearchIndex=Books"];
+    NSURL * url = [NSURL URLWithString:newString];
     
     NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url
                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                         if(error == nil)
                                                         {
                                                             NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-                                                            NSLog(@"Data = %@",text);
+                                                            //NSLog(@"Data = %@",text);
+                                                            
+                                                            NSError *e = nil;
+                                                            NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &e];
+                                                            
+                                                            if (!jsonArray) {
+                                                                NSLog(@"Error parsing JSON: %@", e);
+                                                            } else {
+                                                                
+                                                                [_matchingItems removeAllObjects];
+                                                                
+                                                                for(NSDictionary *item in jsonArray) {
+                                                                    //NSLog(@"Item: %@", item);
+                                                                    [_matchingItems addObject:item];
+                                                                }
+                                                                
+                                                                NSLog(@"Item: %lu",  (unsigned long)[self.matchingItems count]);
+                                                                
+                                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                                    
+                                                                    [self.tableView reloadData];
+                                                                });
+                                                            }
+                                                            
+                                                            
                                                         } else {
                                                             NSLog(@"error!!!!!!!!!!!!!!!");
                                                         }
@@ -126,8 +205,11 @@
     [searchBar resignFirstResponder];
     
 
-    
-    
+    [self startSearch:self.searchBar.text];
+}
+
+-(void)searchBar:(UISearchBar *)bar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+{
     [self startSearch:self.searchBar.text];
 }
 
