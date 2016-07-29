@@ -45,6 +45,10 @@ NSString *idC;
 NSString *x;
 NSString *y;
 
+int countA = 0;
+int countB = 0;
+int countC = 0;
+
 
 
 - (void)viewDidLoad {
@@ -237,36 +241,51 @@ NSString *y;
     
     if (rssiA != nil && rssiB != nil && rssiC != nil) {
         ///////////////////POST////////////
-                NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-                NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
         
-                NSURL * url = [NSURL URLWithString:@"http://ec2-52-87-235-234.compute-1.amazonaws.com:8080/navigation"];
-                NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
-        
-        NSString * params = [NSString stringWithFormat:@"rssiA=%@&txPowerA=%@&rssiB=%@&txPowerB=%@&rssiC=%@&txPowerC=%@",rssiA,txPowerA,rssiB,txPowerB,rssiC,txPowerC];
-                [urlRequest setHTTPMethod:@"POST"];
-                [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
-        
-                NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest
-                                                                   completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                                       NSLog(@"Response:%@ %@\n", response, error);
-                                                                       NSDictionary *jsonObject=[NSJSONSerialization
-                                                                                                 JSONObjectWithData:data
-                                                                                                 options:NSJSONReadingMutableLeaves
-                                                                                                 error:nil];
-                                                                       NSLog(@"jsonObject is %@",jsonObject);
-                                                                       x = jsonObject[@"x"];
-                                                                       y = jsonObject[@"y"];
-                                                                       NSLog(@"x is %@", x);
-                                                                       NSLog(@"y is %@", y);
-                                                                       if(error == nil)
-                                                                       {
-                                                                           NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-                                                                           NSLog(@"Data = %@",text);
-                                                                       }
+        if (countA > 2 && countB > 2 && countC > 2) {
             
-                                                                   }];
-                [dataTask resume];
+            countA = 0;
+            countB = 0;
+            countC = 0;
+            NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+            
+            NSURL * url = [NSURL URLWithString:@"http://ec2-52-87-235-234.compute-1.amazonaws.com:8080/navigation"];
+            NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+            
+            NSString * params = [NSString stringWithFormat:@"rssiA=%@&txPowerA=%@&rssiB=%@&txPowerB=%@&rssiC=%@&txPowerC=%@",rssiA,txPowerA,rssiB,txPowerB,rssiC,txPowerC];
+            [urlRequest setHTTPMethod:@"POST"];
+            [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest
+                                                               completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                                   NSLog(@"Response:%@ %@\n", response, error);
+                                                                   NSDictionary *jsonObject=[NSJSONSerialization
+                                                                                             JSONObjectWithData:data
+                                                                                             options:NSJSONReadingMutableLeaves
+                                                                                             error:nil];
+                                                                   NSLog(@"jsonObject is %@",jsonObject);
+                                                                   x = jsonObject[@"x"];
+                                                                   y = jsonObject[@"y"];
+                                                                   NSLog(@"x is %@", x);
+                                                                   NSLog(@"y is %@", y);
+                                                                   if(error == nil)
+                                                                   {
+                                                                       NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+                                                                       NSLog(@"Data = %@",text);
+                                                                   }
+                                                                   
+                                                               }];
+            [dataTask resume];
+            
+        } else if ([ID isEqualToString:idA]) {
+            countA++;
+        } else if ([ID isEqualToString:idB]) {
+            countB++;
+        } else if ([ID isEqualToString:idC]) {
+            countC++;
+        }
+
     }
     
     /////////////////////POST////////////
