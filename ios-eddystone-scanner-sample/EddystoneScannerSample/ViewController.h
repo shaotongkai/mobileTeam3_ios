@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSMutableArray * dataB;
 @property (nonatomic, strong) NSMutableArray * dataC;
 
+@property (strong, nonatomic) IBOutlet UIImageView *imageview;
 
 @end
 

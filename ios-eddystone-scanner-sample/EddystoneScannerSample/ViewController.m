@@ -49,17 +49,39 @@ int countA = 0;
 int countB = 0;
 int countC = 0;
 
+CGFloat xFloat;
+CGFloat yFloat;
 
 
+UILabel *myLabel;
 
 
 - (void)viewDidLoad {
   [super viewDidLoad];
     
-    
     _dataA = [[NSMutableArray alloc] init];
     _dataB = [[NSMutableArray alloc] init];
     _dataC = [[NSMutableArray alloc] init];
+    
+    
+    UIImage *image = [UIImage imageNamed:@"map.png"];
+    
+    
+    myLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 100, 200, 40)];
+    [myLabel setBackgroundColor:[UIColor clearColor]];
+    [myLabel setText:@"You!"];
+    [myLabel setTextColor:[UIColor redColor]];
+    [[self view] addSubview:myLabel];
+    //[myLabel release];
+    
+    [_imageview setImage: image];
+    
+    
+
+    
+    _imageview.contentMode = UIViewContentModeScaleAspectFit;
+    _imageview.clipsToBounds = YES;
+    
   // Do any additional setup after loading the view, typically from a nib.
     ///////////////////POST////////////
 //        NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -127,29 +149,15 @@ int countC = 0;
   _scanner = [[ESSBeaconScanner alloc] init];
   _scanner.delegate = self;
   [_scanner startScanning];
-    
-    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
   [super viewDidDisappear:animated];
   [_scanner stopScanning];
   _scanner = nil;
+
 }
 
-- (CGPoint)getCoordinateWithBeaconA:(CGPoint)a beaconB:(CGPoint)b beaconC:(CGPoint)c distanceA:(CGFloat)dA distanceB:(CGFloat)dB distanceC:(CGFloat)dC {
-    CGFloat W, Z, x, y, y2;
-    W = dA*dA - dB*dB - a.x*a.x - a.y*a.y + b.x*b.x + b.y*b.y;
-    Z = dB*dB - dC*dC - b.x*b.x - b.y*b.y + c.x*c.x + c.y*c.y;
-    
-    x = (W*(c.y-b.y) - Z*(b.y-a.y)) / (2 * ((b.x-a.x)*(c.y-b.y) - (c.x-b.x)*(b.y-a.y)));
-    y = (W - 2*x*(b.x-a.x)) / (2*(b.y-a.y));
-    //y2 is a second measure of y to mitigate errors
-    y2 = (Z - 2*x*(c.x-b.x)) / (2*(c.y-b.y));
-    
-    y = (y + y2) / 2;
-    return CGPointMake(x, y);
-}
 
 
 - (void)beaconScanner:(ESSBeaconScanner *)scanner
@@ -319,6 +327,12 @@ int countC = 0;
                                                                    y = jsonObject[@"y"];
                                                                    NSLog(@"x is %@", x);
                                                                    NSLog(@"y is %@", y);
+                                                                   xFloat = [x floatValue];
+                                                                   yFloat = [y floatValue];
+                                                                   NSLog(@" %f", xFloat);
+                                                                   NSLog(@" %f", yFloat);
+                                                                   //UILabel *myLabel = [[UILabel alloc]initWithFrame:CGRectMake(xFloat, yFloat, 200, 40)];
+                                                                   myLabel.frame =CGRectMake(xFloat, yFloat, 200, 40);
                                                                    if(error == nil)
                                                                    {
                                                                        NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
@@ -327,6 +341,8 @@ int countC = 0;
                                                                    
                                                                }];
             [dataTask resume];
+            
+
             
         } else if ([ID isEqualToString:idA]) {
             countA++;
