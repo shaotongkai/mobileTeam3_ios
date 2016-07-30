@@ -16,6 +16,10 @@
 
 @interface ViewController : UIViewController
 
+@property (nonatomic, strong) NSMutableArray * dataA;
+@property (nonatomic, strong) NSMutableArray * dataB;
+@property (nonatomic, strong) NSMutableArray * dataC;
+
 
 @end
 

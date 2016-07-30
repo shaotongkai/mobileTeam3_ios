@@ -24,9 +24,9 @@
 
 @implementation ViewController
 
-NSString *rssiA;
-NSString *rssiB;
-NSString *rssiC;
+int rssiA = 0;
+int rssiB = 0;
+int rssiC = 0;
 
 NSString *txPowerA;
 NSString *txPowerB;
@@ -51,8 +51,15 @@ int countC = 0;
 
 
 
+
+
 - (void)viewDidLoad {
   [super viewDidLoad];
+    
+    
+    _dataA = [[NSMutableArray alloc] init];
+    _dataB = [[NSMutableArray alloc] init];
+    _dataC = [[NSMutableArray alloc] init];
   // Do any additional setup after loading the view, typically from a nib.
     ///////////////////POST////////////
 //        NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -89,7 +96,7 @@ int countC = 0;
                                                                                   JSONObjectWithData:data
                                                                                   options:NSJSONReadingMutableLeaves
                                                                                   error:nil];
-                                                        NSLog(@"jsonObject is %@",jsonObject);
+                                                        //NSLog(@"jsonObject is %@",jsonObject);
                                                         xA = jsonObject[@"xA"];
                                                         yA = jsonObject[@"yA"];
                                                         xB = jsonObject[@"xB"];
@@ -102,7 +109,7 @@ int countC = 0;
                                                         if(error == nil)
                                                         {
                                                             NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-                                                            NSLog(@"Data = %@",text);
+                                                            //NSLog(@"Data = %@",text);
                                                         } else {
                                                             NSLog(@"error happen");
                                                         }
@@ -148,6 +155,8 @@ int countC = 0;
 - (void)beaconScanner:(ESSBeaconScanner *)scanner
         didFindBeacon:(id)beaconInfo {
     
+//    NSLog(@" FIND ");
+    
   //NSLog(@"I Saw an Eddystone!: %@", beaconInfo);
     
     NSString *be = [NSString stringWithFormat:@"%@", beaconInfo];;
@@ -156,7 +165,7 @@ int countC = 0;
     NSRange postID = [be rangeOfString:@">,"];
     
     NSString *ID = [be substringWithRange:NSMakeRange(preID.location + preID.length, postID.location - preID.location - preID.length)];
-    NSLog(@"%@", ID);
+    //NSLog(@"%@", ID);
     
     
     NSRange preRange = [be rangeOfString:@"RSSI:"];
@@ -166,24 +175,27 @@ int countC = 0;
     NSInteger postIdx = postRange.location;
     
     NSString *RSSI = [be substringWithRange:NSMakeRange(preIdx + 1, postIdx - preIdx - 1)];
-    NSLog(@"%@", RSSI);
+    //NSLog(@"%@", RSSI);
     
     NSString *txPower = [be substringWithRange:NSMakeRange(postRange.location + postRange.length + 1, 1)];
-    NSLog(@"%@", txPower);
+    //NSLog(@"%@", txPower);
     
     if (idA != nil && xA != nil && yA != nil) {
         if ([ID isEqualToString:idA]) {
-            rssiA = RSSI;
+            //NSLog(@"%@", RSSI);
+            NSNumber *temp = [NSNumber numberWithInt:[RSSI intValue]];
+            [_dataA addObject:temp];
             txPowerA = txPower;
             
         } else if ([ID isEqualToString:idB]) {
-            rssiB = RSSI;
+            NSNumber *temp = [NSNumber numberWithInt:[RSSI intValue]];
+            [_dataB addObject:temp];
             txPowerB = txPower;
             
         } else if ([ID isEqualToString:idC]) {
-            rssiC = RSSI;
+            NSNumber *temp = [NSNumber numberWithInt:[RSSI intValue]];
+            [_dataC addObject:temp];
             txPowerC = txPower;
-            
         }
     }
     
@@ -192,6 +204,8 @@ int countC = 0;
 
 - (void)beaconScanner:(ESSBeaconScanner *)scanner didUpdateBeacon:(id)beaconInfo {
  
+    
+//    NSLog(@" UPDATE ");
     
   //NSLog(@"I Updated an Eddystone!: %@", beaconInfo);
     
@@ -209,7 +223,7 @@ int countC = 0;
     NSRange postID = [be rangeOfString:@">,"];
     
     NSString *ID = [be substringWithRange:NSMakeRange(preID.location + preID.length, postID.location - preID.location - preID.length)];
-    NSLog(@"%@", ID);
+    //NSLog(@"%@", ID);
     
     NSRange preRange = [be rangeOfString:@"RSSI:"];
     NSInteger preIdx = preRange.location + preRange.length;
@@ -218,53 +232,89 @@ int countC = 0;
     NSInteger postIdx = postRange.location;
     
     NSString *RSSI = [be substringWithRange:NSMakeRange(preIdx + 1, postIdx - preIdx - 1)];
-    NSLog(@"%@", RSSI);
+    //NSLog(@"%@", RSSI);
     
     NSString *txPower = [be substringWithRange:NSMakeRange(postRange.location + postRange.length + 1, 1)];
-    NSLog(@"%@", txPower);
+    //NSLog(@"%@", txPower);
+    
     
     if (idA != nil && xA != nil && yA != nil) {
         if ([ID isEqualToString:idA]) {
-            rssiA = RSSI;
+            //NSLog(@" RSSI: %@", RSSI);
+            NSNumber *tempA = [NSNumber numberWithInt:[RSSI intValue]];
+            //NSLog(@"temp : %@",tempA);
+            [_dataA addObject:tempA];
+            //NSLog(@"data a count");
+            //NSLog(@"%lu", (unsigned long)[self.dataA count]);
             txPowerA = txPower;
             
         } else if ([ID isEqualToString:idB]) {
-            rssiB = RSSI;
+            NSNumber *tempB = [NSNumber numberWithInt:[RSSI intValue]];
+            [_dataB addObject:tempB];
+            //NSLog(@"%@",tempB);
+            //NSLog(@"data b count");
+            //NSLog(@"%lu", (unsigned long)[self.dataB count]);
             txPowerB = txPower;
             
         } else if ([ID isEqualToString:idC]) {
-            rssiC = RSSI;
+            NSNumber *tempC = [NSNumber numberWithInt:[RSSI intValue]];
+            [_dataC addObject:tempC];
+            //NSLog(@"%@",tempC);
+            //NSLog(@"data c count");
+            //NSLog(@"%lu", (unsigned long)[self.dataC count]);
             txPowerC = txPower;
-            
         }
     }
+
     
-    if (rssiA != nil && rssiB != nil && rssiC != nil) {
-        ///////////////////POST////////////
+
         
-        if (countA > 2 && countB > 2 && countC > 2) {
+        if (countA > 45) {
             
             countA = 0;
             countB = 0;
             countC = 0;
+            
+            NSSortDescriptor *lowTohigh = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+            NSLog(@"%lu", (unsigned long)_dataA.count);
+            NSLog(@"%lu", (unsigned long)_dataB.count);
+            NSLog(@"%lu", (unsigned long)_dataC.count);
+            [_dataA sortUsingDescriptors:[NSArray arrayWithObject:lowTohigh]];
+            [_dataB sortUsingDescriptors:[NSArray arrayWithObject:lowTohigh]];
+            [_dataC sortUsingDescriptors:[NSArray arrayWithObject:lowTohigh]];
+            unsigned long lengthA = _dataA.count;
+            unsigned long lengthB = _dataB.count;
+            unsigned long lengthC = _dataC.count;
+
+            
+            NSString *sA = [[_dataA objectAtIndex:lengthA / 2] stringValue];
+            NSString *sB = [[_dataB objectAtIndex:lengthB / 2] stringValue];
+            NSString *sC = [[_dataC objectAtIndex:lengthC / 2] stringValue];
+            
+//            rssiA = 0;
+//            rssiB = 0;
+//            rssiC = 0;
             NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
             NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
             
             NSURL * url = [NSURL URLWithString:@"http://ec2-52-87-235-234.compute-1.amazonaws.com:8080/navigation"];
             NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
             
-            NSString * params = [NSString stringWithFormat:@"rssiA=%@&txPowerA=%@&rssiB=%@&txPowerB=%@&rssiC=%@&txPowerC=%@",rssiA,txPowerA,rssiB,txPowerB,rssiC,txPowerC];
+            
+            
+            NSString * params = [NSString stringWithFormat:@"rssiA=%@&txPowerA=%@&rssiB=%@&txPowerB=%@&rssiC=%@&txPowerC=%@",sA,txPowerA,sB,txPowerB,sC,txPowerC];
+            NSLog(@"%@", params);
             [urlRequest setHTTPMethod:@"POST"];
             [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
             
             NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest
                                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                                   NSLog(@"Response:%@ %@\n", response, error);
+                                                                   //NSLog(@"Response:%@ %@\n", response, error);
                                                                    NSDictionary *jsonObject=[NSJSONSerialization
                                                                                              JSONObjectWithData:data
                                                                                              options:NSJSONReadingMutableLeaves
                                                                                              error:nil];
-                                                                   NSLog(@"jsonObject is %@",jsonObject);
+                                                                   //NSLog(@"jsonObject is %@",jsonObject);
                                                                    x = jsonObject[@"x"];
                                                                    y = jsonObject[@"y"];
                                                                    NSLog(@"x is %@", x);
@@ -272,7 +322,7 @@ int countC = 0;
                                                                    if(error == nil)
                                                                    {
                                                                        NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-                                                                       NSLog(@"Data = %@",text);
+                                                                       //NSLog(@"Data = %@",text);
                                                                    }
                                                                    
                                                                }];
@@ -281,12 +331,12 @@ int countC = 0;
         } else if ([ID isEqualToString:idA]) {
             countA++;
         } else if ([ID isEqualToString:idB]) {
-            countB++;
+            countA++;
         } else if ([ID isEqualToString:idC]) {
-            countC++;
+            countA++;
         }
 
-    }
+
     
     /////////////////////POST////////////
 //    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -333,7 +383,7 @@ int countC = 0;
 
 
 - (void)beaconScanner:(ESSBeaconScanner *)scanner didFindURL:(NSURL *)url {
-  NSLog(@"I Saw a URL!: %@", url);
+  //NSLog(@"I Saw a URL!: %@", url);
 }
 
 @end
