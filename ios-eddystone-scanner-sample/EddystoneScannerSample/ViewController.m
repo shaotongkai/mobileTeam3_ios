@@ -67,36 +67,36 @@ UILabel *myLabel;
 //    UIImage *image = [UIImage imageNamed:@"supermarket.png"];
 //    [_imageview setImage: image];
     
-    UIImage *locImage = [UIImage imageNamed:@"sb"];
-    
-    UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
-    [btn setImage:locImage forState:UIControlStateNormal];
-
-    btn.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/2 - 50);
-    
-    [[self view] addSubview:btn];
-    
-    UIButton* btn1 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
-    [btn1 setImage:locImage forState:UIControlStateNormal];
-    
-    btn1.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 - 50);
-    
-    [[self view] addSubview:btn1];
-    
-    UIButton* btn2 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
-    [btn2 setImage:locImage forState:UIControlStateNormal];
-    
-    btn2.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/4 - 20);
-    
-    [[self view] addSubview:btn2];
-    
-    
-    UIButton* btn3 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
-    [btn3 setImage:locImage forState:UIControlStateNormal];
-    
-    btn3.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/3 * 2 - 20);
-    
-    [[self view] addSubview:btn3];
+//    UIImage *locImage = [UIImage imageNamed:@"sb"];
+//    
+//    UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+//    [btn setImage:locImage forState:UIControlStateNormal];
+//
+//    btn.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/2 - 50);
+//    
+//    [[self view] addSubview:btn];
+//    
+//    UIButton* btn1 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+//    [btn1 setImage:locImage forState:UIControlStateNormal];
+//    
+//    btn1.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 - 50);
+//    
+//    [[self view] addSubview:btn1];
+//    
+//    UIButton* btn2 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+//    [btn2 setImage:locImage forState:UIControlStateNormal];
+//    
+//    btn2.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/4 - 20);
+//    
+//    [[self view] addSubview:btn2];
+//    
+//    
+//    UIButton* btn3 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+//    [btn3 setImage:locImage forState:UIControlStateNormal];
+//    
+//    btn3.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/3 * 2 - 20);
+//    
+//    [[self view] addSubview:btn3];
     
     
     
@@ -303,7 +303,7 @@ UILabel *myLabel;
     
 
         
-        if (countA > 45) {
+        if (countA > 15) {
             
             countA = 0;
             countB = 0;
@@ -319,7 +319,68 @@ UILabel *myLabel;
             unsigned long lengthA = _dataA.count;
             unsigned long lengthB = _dataB.count;
             unsigned long lengthC = _dataC.count;
+            NSNumber *medianA = [_dataA objectAtIndex:lengthA / 2];
+            NSNumber *medianB = [_dataB objectAtIndex:lengthB / 2];
+            NSNumber *medianC = [_dataC objectAtIndex:lengthC / 2];
+            NSNumber *median = 0;
+            
+            NSString *becon = @"A";
+            if (medianA < medianB) {
+                median = medianB;
+                becon = @"B";
+            } else {
+                median = medianA;
+                becon = @"A";
+            }
+            if (median < medianC) {
+                median = medianC;
+                becon = @"C";
+            }
+            
+            if ([becon isEqualToString:@"A"]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // code here
+                    
+                    UIImage *locImage = [UIImage imageNamed:@"sb"];
+                    
+                    UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+                    [btn setImage:locImage forState:UIControlStateNormal];
+                    
+                    btn.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/2 - 50);
+                    
+                    [[self view] addSubview:btn];
+                });
 
+            } else if ([becon isEqualToString:@"B"]) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // code here
+                    UIImage *locImage = [UIImage imageNamed:@"sb"];
+                    UIButton* btn3 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+                    [btn3 setImage:locImage forState:UIControlStateNormal];
+                    
+                    btn3.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/3 * 2 - 20);
+                    
+                    [[self view] addSubview:btn3];
+                });
+                
+
+                
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // code here
+                    UIImage *locImage = [UIImage imageNamed:@"sb"];
+                    UIButton* btn2 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+                    [btn2 setImage:locImage forState:UIControlStateNormal];
+                    
+                    btn2.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/4 - 20);
+                    
+                    [[self view] addSubview:btn2];
+
+                });
+  
+                
+            }
             
             NSString *sA = [[_dataA objectAtIndex:lengthA / 2] stringValue];
             NSString *sB = [[_dataB objectAtIndex:lengthB / 2] stringValue];
