@@ -128,6 +128,9 @@ UILabel *myLabel;
                                                         idA = jsonObject[@"idA"];
                                                         idB = jsonObject[@"idB"];
                                                         idC = jsonObject[@"idC"];
+                                                        NSLog(@"ida is %@", idA);
+                                                        NSLog(@"idb is %@", idB);
+                                                        NSLog(@"idc is %@", idC);
                                                         if(error == nil)
                                                         {
                                                             NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
