@@ -64,17 +64,40 @@ UILabel *myLabel;
     _dataC = [[NSMutableArray alloc] init];
     
     
-    UIImage *image = [UIImage imageNamed:@"map.png"];
+//    UIImage *image = [UIImage imageNamed:@"supermarket.png"];
+//    [_imageview setImage: image];
+    
+    UIImage *locImage = [UIImage imageNamed:@"sb"];
+    
+    UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+    [btn setImage:locImage forState:UIControlStateNormal];
+
+    btn.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/2 - 50);
+    
+    [[self view] addSubview:btn];
+    
+    UIButton* btn1 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+    [btn1 setImage:locImage forState:UIControlStateNormal];
+    
+    btn1.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 - 50);
+    
+    [[self view] addSubview:btn1];
+    
+    UIButton* btn2 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+    [btn2 setImage:locImage forState:UIControlStateNormal];
+    
+    btn2.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/4 - 20);
+    
+    [[self view] addSubview:btn2];
     
     
-    myLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 100, 200, 40)];
-    [myLabel setBackgroundColor:[UIColor clearColor]];
-    [myLabel setText:@"You!"];
-    [myLabel setTextColor:[UIColor redColor]];
-    [[self view] addSubview:myLabel];
-    //[myLabel release];
+    UIButton* btn3 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+    [btn3 setImage:locImage forState:UIControlStateNormal];
     
-    [_imageview setImage: image];
+    btn3.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/3 * 2 - 20);
+    
+    [[self view] addSubview:btn3];
+    
     
     
 

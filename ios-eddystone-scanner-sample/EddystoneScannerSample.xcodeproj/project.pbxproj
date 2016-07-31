@@ -29,7 +29,6 @@
 		6BD89F811B1545AA001C5B31 /* ESSBeaconScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD89F801B1545AA001C5B31 /* ESSBeaconScanner.m */; };
 		81A3DA441D480B7B006E1CCA /* FirstTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A3DA431D480B7B006E1CCA /* FirstTableViewController.m */; };
 		81A3DA471D480BA7006E1CCA /* FirstDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A3DA461D480BA7006E1CCA /* FirstDetailViewController.m */; };
-		81C566921D4C673F0042B9DE /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C566911D4C673F0042B9DE /* map.png */; };
 		D865658A1D49F406002F1858 /* FirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86565891D49F406002F1858 /* FirstTableViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -78,7 +77,6 @@
 		81A3DA431D480B7B006E1CCA /* FirstTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstTableViewController.m; sourceTree = "<group>"; };
 		81A3DA451D480BA7006E1CCA /* FirstDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstDetailViewController.h; sourceTree = "<group>"; };
 		81A3DA461D480BA7006E1CCA /* FirstDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstDetailViewController.m; sourceTree = "<group>"; };
-		81C566911D4C673F0042B9DE /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map.png; path = ../../../../../Desktop/map.png; sourceTree = "<group>"; };
 		D86565881D49F406002F1858 /* FirstTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstTableViewCell.h; sourceTree = "<group>"; };
 		D86565891D49F406002F1858 /* FirstTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -209,7 +207,6 @@
 		6BD89F571B154502001C5B31 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				81C566911D4C673F0042B9DE /* map.png */,
 				6BD89F581B154502001C5B31 /* Info.plist */,
 				6BD89F591B154502001C5B31 /* main.m */,
 			);
@@ -350,7 +347,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81C566921D4C673F0042B9DE /* map.png in Resources */,
 				6BD89F631B154503001C5B31 /* Main.storyboard in Resources */,
 				6BD89F681B154503001C5B31 /* LaunchScreen.xib in Resources */,
 				6BD89F651B154503001C5B31 /* Images.xcassets in Resources */,

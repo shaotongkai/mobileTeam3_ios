@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "Geolocation-icon.png",
       "scale" : "1x"
     },
     {
