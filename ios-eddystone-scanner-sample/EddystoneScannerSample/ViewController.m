@@ -59,74 +59,50 @@ UILabel *myLabel;
 - (void)viewDidLoad {
   [super viewDidLoad];
     
+
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    _imageview.contentMode = UIViewContentModeScaleAspectFit;
+//    _imageview.clipsToBounds = YES;
+    
+    
     _dataA = [[NSMutableArray alloc] init];
     _dataB = [[NSMutableArray alloc] init];
     _dataC = [[NSMutableArray alloc] init];
     
-    
-//    UIImage *image = [UIImage imageNamed:@"supermarket.png"];
-//    [_imageview setImage: image];
-    
-//    UIImage *locImage = [UIImage imageNamed:@"sb"];
-//    
-//    UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
-//    [btn setImage:locImage forState:UIControlStateNormal];
-//
-//    btn.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/2 - 50);
-//    
-//    [[self view] addSubview:btn];
-//    
-//    UIButton* btn1 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
-//    [btn1 setImage:locImage forState:UIControlStateNormal];
-//    
-//    btn1.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 - 50);
-//    
-//    [[self view] addSubview:btn1];
-//    
-//    UIButton* btn2 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
-//    [btn2 setImage:locImage forState:UIControlStateNormal];
-//    
-//    btn2.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/4 - 20);
-//    
-//    [[self view] addSubview:btn2];
-//    
-//    
-//    UIButton* btn3 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
-//    [btn3 setImage:locImage forState:UIControlStateNormal];
-//    
-//    btn3.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/3 * 2 - 20);
-//    
-//    [[self view] addSubview:btn3];
+    UIImage *locImage = [UIImage imageNamed:@"sb"];
+    _btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+    [_btn setImage:locImage forState:UIControlStateNormal];
     
     
     
-
     
-    _imageview.contentMode = UIViewContentModeScaleAspectFit;
-    _imageview.clipsToBounds = YES;
     
-  // Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view, typically from a nib.
     ///////////////////POST////////////
-//        NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-//        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
-//    
-//        NSURL * url = [NSURL URLWithString:@"http://ec2-52-87-235-234.compute-1.amazonaws.com:8080/navigation"];
-//        NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
-//        NSString * params =@"rssiA=-70&txPowerA=0&rssiB=-61&txPowerB=0&rssiC=-63&txPowerC=0";
-//        [urlRequest setHTTPMethod:@"POST"];
-//        [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
-//    
-//        NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest
-//                                                           completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//                                                               NSLog(@"Response:%@ %@\n", response, error);
-//                                                               if(error == nil)
-//                                                               {
-//                                                                   NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-//                                                                   NSLog(@"Data = %@",text);
-//                                                               }
-//    
-//                                                           }];
-//        [dataTask resume];
+    //        NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    //        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+    //
+    //        NSURL * url = [NSURL URLWithString:@"http://ec2-52-87-235-234.compute-1.amazonaws.com:8080/navigation"];
+    //        NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+    //        NSString * params =@"rssiA=-70&txPowerA=0&rssiB=-61&txPowerB=0&rssiC=-63&txPowerC=0";
+    //        [urlRequest setHTTPMethod:@"POST"];
+    //        [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+    //
+    //        NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest
+    //                                                           completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    //                                                               NSLog(@"Response:%@ %@\n", response, error);
+    //                                                               if(error == nil)
+    //                                                               {
+    //                                                                   NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+    //                                                                   NSLog(@"Data = %@",text);
+    //                                                               }
+    //
+    //                                                           }];
+    //        [dataTask resume];
     
     
     //get beaconlist
@@ -166,8 +142,53 @@ UILabel *myLabel;
     
     [dataTask resume];
     
-
-
+    if ([_section isEqualToString:@"A"]) {
+        UIButton* btn2 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+        [btn2 setImage:_product forState:UIControlStateNormal];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // code here
+            
+            
+            btn2.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/4 - 20);
+            
+            [[self view] addSubview:btn2];
+            
+        });
+        
+    }
+    
+    if ([_section isEqualToString:@"B"]) {
+        UIButton* btn2 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+        [btn2 setImage:_product forState:UIControlStateNormal];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // code here
+            
+            
+            btn2.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 - 50);
+            
+            [[self view] addSubview:btn2];
+            
+        });
+        
+    }
+    
+    if ([_section isEqualToString:@"C"]) {
+        UIButton* btn2 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+        [btn2 setImage:_product forState:UIControlStateNormal];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // code here
+            
+            
+            btn2.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/3 * 2 - 20);
+            
+            [[self view] addSubview:btn2];
+            
+        });
+        
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -181,6 +202,11 @@ UILabel *myLabel;
   [super viewDidDisappear:animated];
   [_scanner stopScanning];
   _scanner = nil;
+    _dataA = nil;
+    _dataB = nil;
+    _dataC = nil;
+    [_btn removeFromSuperview];
+    _btn = nil;
 
 }
 
@@ -303,7 +329,7 @@ UILabel *myLabel;
     
 
         
-        if (countA > 15) {
+        if (countA > 0 && countB > 0 && countC > 0) {
             
             countA = 0;
             countB = 0;
@@ -324,6 +350,13 @@ UILabel *myLabel;
             NSNumber *medianC = [_dataC objectAtIndex:lengthC / 2];
             NSNumber *median = 0;
             
+            //clear
+            [_dataA removeAllObjects];
+            [_dataB removeAllObjects];
+            [_dataC removeAllObjects];
+            
+            
+            
             NSString *becon = @"A";
             if (medianA < medianB) {
                 median = medianB;
@@ -337,106 +370,100 @@ UILabel *myLabel;
                 becon = @"C";
             }
             
+            //b
             if ([becon isEqualToString:@"A"]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // code here
                     
-                    UIImage *locImage = [UIImage imageNamed:@"sb"];
+                    _btn.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/2 - 50);
                     
-                    UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
-                    [btn setImage:locImage forState:UIControlStateNormal];
-                    
-                    btn.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/2 - 50);
-                    
-                    [[self view] addSubview:btn];
+                    [[self view] addSubview:_btn];
                 });
 
             } else if ([becon isEqualToString:@"B"]) {
+                //c
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // code here
-                    UIImage *locImage = [UIImage imageNamed:@"sb"];
-                    UIButton* btn3 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
-                    [btn3 setImage:locImage forState:UIControlStateNormal];
                     
-                    btn3.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/3 * 2 - 20);
+                    _btn.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/3 * 2 - 20);
                     
-                    [[self view] addSubview:btn3];
+                    [[self view] addSubview:_btn];
                 });
                 
 
                 
             } else {
+                //a
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // code here
-                    UIImage *locImage = [UIImage imageNamed:@"sb"];
-                    UIButton* btn2 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
-                    [btn2 setImage:locImage forState:UIControlStateNormal];
                     
-                    btn2.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/4 - 20);
                     
-                    [[self view] addSubview:btn2];
+                    _btn.center = CGPointMake(self.view.frame.size.width/2 - 100, self.view.frame.size.height/4 - 20);
+                    
+                    [[self view] addSubview:_btn];
 
                 });
   
                 
             }
             
-            NSString *sA = [[_dataA objectAtIndex:lengthA / 2] stringValue];
-            NSString *sB = [[_dataB objectAtIndex:lengthB / 2] stringValue];
-            NSString *sC = [[_dataC objectAtIndex:lengthC / 2] stringValue];
-            
-//            rssiA = 0;
-//            rssiB = 0;
-//            rssiC = 0;
-            NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
-            
-            NSURL * url = [NSURL URLWithString:@"http://ec2-52-87-235-234.compute-1.amazonaws.com:8080/navigation"];
-            NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
-            
-            
-            
-            NSString * params = [NSString stringWithFormat:@"rssiA=%@&txPowerA=%@&rssiB=%@&txPowerB=%@&rssiC=%@&txPowerC=%@",sA,txPowerA,sB,txPowerB,sC,txPowerC];
-            NSLog(@"%@", params);
-            [urlRequest setHTTPMethod:@"POST"];
-            [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
-            
-            NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest
-                                                               completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                                   //NSLog(@"Response:%@ %@\n", response, error);
-                                                                   NSDictionary *jsonObject=[NSJSONSerialization
-                                                                                             JSONObjectWithData:data
-                                                                                             options:NSJSONReadingMutableLeaves
-                                                                                             error:nil];
-                                                                   //NSLog(@"jsonObject is %@",jsonObject);
-                                                                   x = jsonObject[@"x"];
-                                                                   y = jsonObject[@"y"];
-                                                                   NSLog(@"x is %@", x);
-                                                                   NSLog(@"y is %@", y);
-                                                                   xFloat = [x floatValue];
-                                                                   yFloat = [y floatValue];
-                                                                   NSLog(@" %f", xFloat);
-                                                                   NSLog(@" %f", yFloat);
-                                                                   //UILabel *myLabel = [[UILabel alloc]initWithFrame:CGRectMake(xFloat, yFloat, 200, 40)];
-                                                                   myLabel.frame =CGRectMake(xFloat, yFloat, 200, 40);
-                                                                   if(error == nil)
-                                                                   {
-                                                                       NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-                                                                       //NSLog(@"Data = %@",text);
-                                                                   }
-                                                                   
-                                                               }];
-            [dataTask resume];
-            
+//            NSString *sA = [[_dataA objectAtIndex:lengthA / 2] stringValue];
+//            NSString *sB = [[_dataB objectAtIndex:lengthB / 2] stringValue];
+//            NSString *sC = [[_dataC objectAtIndex:lengthC / 2] stringValue];
+//            
+////            rssiA = 0;
+////            rssiB = 0;
+////            rssiC = 0;
+//            NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+//            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+//            
+//            NSURL * url = [NSURL URLWithString:@"http://ec2-52-87-235-234.compute-1.amazonaws.com:8080/navigation"];
+//            NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+//            
+//            
+//            
+//            NSString * params = [NSString stringWithFormat:@"rssiA=%@&txPowerA=%@&rssiB=%@&txPowerB=%@&rssiC=%@&txPowerC=%@",sA,txPowerA,sB,txPowerB,sC,txPowerC];
+//            NSLog(@"%@", params);
+//            [urlRequest setHTTPMethod:@"POST"];
+//            [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+//            
+//            NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest
+//                                                               completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//                                                                   //NSLog(@"Response:%@ %@\n", response, error);
+//                                                                   NSDictionary *jsonObject=[NSJSONSerialization
+//                                                                                             JSONObjectWithData:data
+//                                                                                             options:NSJSONReadingMutableLeaves
+//                                                                                             error:nil];
+//                                                                   //NSLog(@"jsonObject is %@",jsonObject);
+//                                                                   x = jsonObject[@"x"];
+//                                                                   y = jsonObject[@"y"];
+//                                                                   NSLog(@"x is %@", x);
+//                                                                   NSLog(@"y is %@", y);
+//                                                                   xFloat = [x floatValue];
+//                                                                   yFloat = [y floatValue];
+//                                                                   NSLog(@" %f", xFloat);
+//                                                                   NSLog(@" %f", yFloat);
+//                                                                   //UILabel *myLabel = [[UILabel alloc]initWithFrame:CGRectMake(xFloat, yFloat, 200, 40)];
+//                                                                   myLabel.frame =CGRectMake(xFloat, yFloat, 200, 40);
+//                                                                   if(error == nil)
+//                                                                   {
+//                                                                       NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+//                                                                       //NSLog(@"Data = %@",text);
+//                                                                   }
+//                                                                   
+//                                                               }];
+//            [dataTask resume];
+//            
 
             
         } else if ([ID isEqualToString:idA]) {
             countA++;
         } else if ([ID isEqualToString:idB]) {
-            countA++;
+            countB++;
         } else if ([ID isEqualToString:idC]) {
-            countA++;
+            countC++;
         }
 
 

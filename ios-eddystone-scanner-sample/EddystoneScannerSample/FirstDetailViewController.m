@@ -7,6 +7,7 @@
 //
 
 #import "FirstDetailViewController.h"
+#import "ViewController.h"
 
 #define kVerySmallValue (0.000001)
 
@@ -19,6 +20,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    if ([_whichView isEqualToString:@"no"]) {
+        _shooop.enabled = false;
+        [_cuooo setHidden:YES];
+    }
+    
     _itemTitle.text = _item[@"title"];
     
     _ASIN = _item[@"ASIN"];
@@ -28,9 +35,11 @@
     NSURL * url = [NSURL URLWithString: _item[@"image"]];
     
     
+    
     NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *_Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (data) {
             UIImage *image = [UIImage imageWithData:data];
+            _product = image;
             if(image) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // code here
@@ -40,7 +49,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // code here
                     UIImage *defaultImage = [UIImage imageNamed:@"default.png"];
-                    [_image setImage:image];
+                    [_image setImage:defaultImage];
                 });
             }
         }
@@ -90,6 +99,9 @@
                                                             } else {
                                                                 _label3.text = @"In store";
                                                                 _price.text = jsonObject[@"price"];
+                                                                _section = jsonObject[@"section"];
+                                                                NSLog(@"%@", jsonObject[@"section"]);
+                                                                _navigation.enabled = true;
                                                             }
                                                             
                                                             dispatch_async(dispatch_get_main_queue(), ^{
@@ -122,4 +134,70 @@
 }
 */
 
+- (IBAction)navi:(id)sender {
+    if(self.coolViewController == nil)
+    {
+        //NewViewController *coolViewController = [[NewViewController alloc] init];
+        ViewController *coolViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"newScreen"];
+        self.coolViewController = coolViewController;
+    }
+    
+    self.coolViewController.product = _product;
+    
+    self.coolViewController.section = _section;
+    
+    
+    [self.navigationController pushViewController:self.coolViewController animated:YES];
+}
+
+- (IBAction)addS:(id)sender {
+    ///////////////////POST////////////
+            NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+    
+            NSURL * url = [NSURL URLWithString:@"http://ec2-52-87-235-234.compute-1.amazonaws.com:8080/editShoppingList"];
+            NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+            NSString * params =@"op=ADD_ITEM";
+//            NSString * pad = @"&";
+            NSString * userId = @"hardcodeHere";
+            params = [params stringByAppendingString:@"&user_id="];
+            params = [params stringByAppendingString:userId];
+            params = [params stringByAppendingString:@"&shoppinglist_id="];
+            params = [params stringByAppendingString:userId];
+            params = [params stringByAppendingString:@"&ASIN="];
+            params = [params stringByAppendingString:_ASIN];
+            params = [params stringByAppendingString:@"&title="];
+            params = [params stringByAppendingString:_item[@"title"]];
+            params = [params stringByAppendingString:@"&imgurl="];
+            params = [params stringByAppendingString:_item[@"image"]];
+    
+    params = [params stringByAppendingString:@"&price="];
+    params = [params stringByAppendingString:_item[@"price"]];
+    params = [params stringByAppendingString:@"&description="];
+    params = [params stringByAppendingString:_item[@"description"]];
+    params = [params stringByAppendingString:@"&customReview="];
+    params = [params stringByAppendingString:_item[@"customReview"]];
+            [urlRequest setHTTPMethod:@"POST"];
+            [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+    
+            NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest
+                                                               completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                                   NSLog(@"Response:%@ %@\n", response, error);
+                                                                   if(error == nil)
+                                                                   {
+                                                                       UIAlertView *alertView = [[UIAlertView alloc]
+                                                                                                 initWithTitle:@"Success"
+                                                                                                 message:@"You add a product into shopping list"
+                                                                                                 delegate:self
+                                                                                                 cancelButtonTitle:@"OK"
+                                                                                                 otherButtonTitles:nil];
+                                                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                                                           // code here
+                                                                           [alertView show];
+                                                                       });
+                                                                   }
+    
+                                                               }];
+            [dataTask resume];
+}
 @end

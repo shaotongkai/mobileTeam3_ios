@@ -30,6 +30,8 @@
 		81A3DA441D480B7B006E1CCA /* FirstTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A3DA431D480B7B006E1CCA /* FirstTableViewController.m */; };
 		81A3DA471D480BA7006E1CCA /* FirstDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A3DA461D480BA7006E1CCA /* FirstDetailViewController.m */; };
 		D865658A1D49F406002F1858 /* FirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86565891D49F406002F1858 /* FirstTableViewCell.m */; };
+		D8DD27221D4F5FF00079E869 /* ThirdTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD27211D4F5FF00079E869 /* ThirdTableViewCell.m */; };
+		D8DD27281D4F61BC0079E869 /* ThirdTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD27271D4F61BC0079E869 /* ThirdTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +81,10 @@
 		81A3DA461D480BA7006E1CCA /* FirstDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstDetailViewController.m; sourceTree = "<group>"; };
 		D86565881D49F406002F1858 /* FirstTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstTableViewCell.h; sourceTree = "<group>"; };
 		D86565891D49F406002F1858 /* FirstTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstTableViewCell.m; sourceTree = "<group>"; };
+		D8DD27201D4F5FF00079E869 /* ThirdTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdTableViewCell.h; sourceTree = "<group>"; };
+		D8DD27211D4F5FF00079E869 /* ThirdTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdTableViewCell.m; sourceTree = "<group>"; };
+		D8DD27261D4F61BC0079E869 /* ThirdTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdTableViewController.h; sourceTree = "<group>"; };
+		D8DD27271D4F61BC0079E869 /* ThirdTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +200,10 @@
 				D86565891D49F406002F1858 /* FirstTableViewCell.m */,
 				81A3DA451D480BA7006E1CCA /* FirstDetailViewController.h */,
 				81A3DA461D480BA7006E1CCA /* FirstDetailViewController.m */,
+				D8DD27201D4F5FF00079E869 /* ThirdTableViewCell.h */,
+				D8DD27211D4F5FF00079E869 /* ThirdTableViewCell.m */,
+				D8DD27261D4F61BC0079E869 /* ThirdTableViewController.h */,
+				D8DD27271D4F61BC0079E869 /* ThirdTableViewController.m */,
 				6BD89F5E1B154502001C5B31 /* ViewController.h */,
 				6BD89F5F1B154502001C5B31 /* ViewController.m */,
 				6BD89F611B154503001C5B31 /* Main.storyboard */,
@@ -382,6 +392,8 @@
 				81A3DA471D480BA7006E1CCA /* FirstDetailViewController.m in Sources */,
 				81A3DA441D480B7B006E1CCA /* FirstTableViewController.m in Sources */,
 				6BD89F601B154502001C5B31 /* ViewController.m in Sources */,
+				D8DD27281D4F61BC0079E869 /* ThirdTableViewController.m in Sources */,
+				D8DD27221D4F5FF00079E869 /* ThirdTableViewCell.m in Sources */,
 				6B3F78851B19766E00AFF84C /* ESSEddystone.m in Sources */,
 				6BD89F5D1B154502001C5B31 /* AppDelegate.m in Sources */,
 				6B3F78981B1CB46A00AFF84C /* ESSTimer.m in Sources */,

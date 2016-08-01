@@ -20,7 +20,14 @@
 @property (nonatomic, strong) NSMutableArray * dataB;
 @property (nonatomic, strong) NSMutableArray * dataC;
 
+@property (nonatomic, strong) UIImage * product;
+
+@property (nonatomic, strong) NSString *section;
+
+
 @property (strong, nonatomic) IBOutlet UIImageView *imageview;
+
+@property (strong, nonatomic) IBOutlet UIButton *btn;
 
 @end
 
