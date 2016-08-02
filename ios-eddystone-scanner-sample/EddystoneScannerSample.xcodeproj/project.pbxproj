@@ -29,6 +29,9 @@
 		6BD89F811B1545AA001C5B31 /* ESSBeaconScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD89F801B1545AA001C5B31 /* ESSBeaconScanner.m */; };
 		81A3DA441D480B7B006E1CCA /* FirstTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A3DA431D480B7B006E1CCA /* FirstTableViewController.m */; };
 		81A3DA471D480BA7006E1CCA /* FirstDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A3DA461D480BA7006E1CCA /* FirstDetailViewController.m */; };
+		D8423BCD1D500F5200E7EBBB /* ForthTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8423BCC1D500F5200E7EBBB /* ForthTableViewController.m */; };
+		D8423BD01D500FAA00E7EBBB /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8423BCF1D500FAA00E7EBBB /* AddViewController.m */; };
+		D8423BD31D501C0500E7EBBB /* ForthDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8423BD21D501C0500E7EBBB /* ForthDetailViewController.m */; };
 		D865658A1D49F406002F1858 /* FirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86565891D49F406002F1858 /* FirstTableViewCell.m */; };
 		D8DD27221D4F5FF00079E869 /* ThirdTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD27211D4F5FF00079E869 /* ThirdTableViewCell.m */; };
 		D8DD27281D4F61BC0079E869 /* ThirdTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD27271D4F61BC0079E869 /* ThirdTableViewController.m */; };
@@ -79,6 +82,12 @@
 		81A3DA431D480B7B006E1CCA /* FirstTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstTableViewController.m; sourceTree = "<group>"; };
 		81A3DA451D480BA7006E1CCA /* FirstDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstDetailViewController.h; sourceTree = "<group>"; };
 		81A3DA461D480BA7006E1CCA /* FirstDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstDetailViewController.m; sourceTree = "<group>"; };
+		D8423BCB1D500F5200E7EBBB /* ForthTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForthTableViewController.h; sourceTree = "<group>"; };
+		D8423BCC1D500F5200E7EBBB /* ForthTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForthTableViewController.m; sourceTree = "<group>"; };
+		D8423BCE1D500FAA00E7EBBB /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
+		D8423BCF1D500FAA00E7EBBB /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		D8423BD11D501C0500E7EBBB /* ForthDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForthDetailViewController.h; sourceTree = "<group>"; };
+		D8423BD21D501C0500E7EBBB /* ForthDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForthDetailViewController.m; sourceTree = "<group>"; };
 		D86565881D49F406002F1858 /* FirstTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstTableViewCell.h; sourceTree = "<group>"; };
 		D86565891D49F406002F1858 /* FirstTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstTableViewCell.m; sourceTree = "<group>"; };
 		D8DD27201D4F5FF00079E869 /* ThirdTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdTableViewCell.h; sourceTree = "<group>"; };
@@ -204,6 +213,12 @@
 				D8DD27211D4F5FF00079E869 /* ThirdTableViewCell.m */,
 				D8DD27261D4F61BC0079E869 /* ThirdTableViewController.h */,
 				D8DD27271D4F61BC0079E869 /* ThirdTableViewController.m */,
+				D8423BCB1D500F5200E7EBBB /* ForthTableViewController.h */,
+				D8423BCC1D500F5200E7EBBB /* ForthTableViewController.m */,
+				D8423BCE1D500FAA00E7EBBB /* AddViewController.h */,
+				D8423BCF1D500FAA00E7EBBB /* AddViewController.m */,
+				D8423BD11D501C0500E7EBBB /* ForthDetailViewController.h */,
+				D8423BD21D501C0500E7EBBB /* ForthDetailViewController.m */,
 				6BD89F5E1B154502001C5B31 /* ViewController.h */,
 				6BD89F5F1B154502001C5B31 /* ViewController.m */,
 				6BD89F611B154503001C5B31 /* Main.storyboard */,
@@ -394,12 +409,15 @@
 				6BD89F601B154502001C5B31 /* ViewController.m in Sources */,
 				D8DD27281D4F61BC0079E869 /* ThirdTableViewController.m in Sources */,
 				D8DD27221D4F5FF00079E869 /* ThirdTableViewCell.m in Sources */,
+				D8423BD31D501C0500E7EBBB /* ForthDetailViewController.m in Sources */,
 				6B3F78851B19766E00AFF84C /* ESSEddystone.m in Sources */,
 				6BD89F5D1B154502001C5B31 /* AppDelegate.m in Sources */,
 				6B3F78981B1CB46A00AFF84C /* ESSTimer.m in Sources */,
 				6BD89F811B1545AA001C5B31 /* ESSBeaconScanner.m in Sources */,
 				6BD89F5A1B154502001C5B31 /* main.m in Sources */,
+				D8423BD01D500FAA00E7EBBB /* AddViewController.m in Sources */,
 				D865658A1D49F406002F1858 /* FirstTableViewCell.m in Sources */,
+				D8423BCD1D500F5200E7EBBB /* ForthTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
